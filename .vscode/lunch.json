@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug TypeScript",
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register"
+            ],
+            "args": [
+                "${workspaceFolder}/src/index.ts"
+            ],
+            "cwd": "${workspaceFolder}",
+            "protocol": "inspector",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/src/**/*.ts"
+            ]
+        }
+    ]
+}
