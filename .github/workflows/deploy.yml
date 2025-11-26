@@ -10,20 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
+      # 2️⃣ Debug FIRST (verify secrets exist)
+      - name: Debug secrets
+        run: |
+          echo "USER=${{ secrets.EC2_USER }}"
+          echo "HOST=${{ secrets.EC2_HOST }}"
+
+      # 3️⃣ Setup SSH
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          touch ~/.ssh/config
+          chmod 600 ~/.ssh/config
           echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
-
+      # 4️⃣ Deploy backend
       - name: Deploy Backend
         run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" << 'EOF'
             set -e
             cd /var/www/hms-backend
             git pull origin main
