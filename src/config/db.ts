@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
-const MONGO_URI: string = process.env.MONGO_URI || '';
+const MONGO_URI: string = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/AuthService';
 
 export const connectDB = async (): Promise<void> => {
   try {

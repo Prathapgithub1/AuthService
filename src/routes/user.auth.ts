@@ -12,6 +12,7 @@ const router = Router();
 //user registration
 router.post('/userRegister', async (req: Request, res: Response) => {
     try {
+        console.log('Received user registration request with body:', req.body);
         // Validate that req.body.params is not empty
         if (Object.keys(req.body.params).length === 0) {
             return res.status(400).json({ success: false, status: 400, message: 'params are required', data: [] });
@@ -210,7 +211,7 @@ router.post('/showProfile', async (req: Request, res: Response) => {
         return res.status(500).json({ success: false, status: 500, message: message || 'Internal Server Error', data: [] });
     }
 })
-
+    
 
 //logout api here
 router.post('/logout', async (req: Request, res: Response) => {
